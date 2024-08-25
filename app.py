@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import numpy as np
 import tensorflow as tf
@@ -10,6 +11,15 @@ model = tf.keras.models.load_model('Model/brain_tumor_cnn_model.h5')
 
 app = FastAPI()
 
+# Add CORS middleware
+orig_cors = ["*"]  # Allow all origins for development
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=orig_cors,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def preprocess_image(image: Image.Image) -> np.ndarray:
     image = image.resize((128, 128))
@@ -17,7 +27,6 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
     image = np.expand_dims(image, axis=0)
     image /= 255.0
     return image
-
 
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
@@ -36,8 +45,6 @@ async def predict(file: UploadFile = File(...)):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run(app, host="0.0.0.0", port=8000)
