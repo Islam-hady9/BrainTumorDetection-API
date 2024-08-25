@@ -38,7 +38,7 @@ async def predict(file: UploadFile = File(...)):
         # Make prediction
         predictions = model.predict(image)
         predicted_class = np.argmax(predictions, axis=1)[0]
-        class_names = ["no", "yes"]
+        class_names = ["No Tumor", "Tumor"]
         result = class_names[predicted_class]
 
         return JSONResponse(content={"prediction": result})
