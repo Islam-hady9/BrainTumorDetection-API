@@ -58,9 +58,9 @@ pip install -r requirements.txt
 
 ## Usage
 
-### 1. **Train the Model**
+### 1. **Train the Model Or Use the Pre-trained Model directly**
 
-If you haven’t trained the model yet, use the Jupyter Notebook `brain_tumor_detection_using_cnn.ipynb` provided in the repository. Ensure you have the MRI images in the `Dataset/` directory and in the correct format before running the notebook.
+If you haven’t trained the model yet, use the Jupyter Notebook `brain_tumor_detection_using_cnn.ipynb` provided in the repository. Ensure you have the MRI images in the `Dataset/` directory and in the correct format before running the notebook or use the pre-trained model `brain_tumor_cnn_model.h5` directly that I trained.
 
 ### 2. **Run the FastAPI Server**
 
@@ -134,6 +134,14 @@ The CNN model used in this project has the following architecture:
 ## Visualization
 
 The repository includes code for visualizing the training process, such as loss curves and confusion matrices. These visualizations can help in understanding the model's performance and diagnosing potential issues.
+
+## Web Interface Screens
+
+### Screen 1: Upload Image
+![Screen_1-Upload image](https://github.com/Islam-hady9/BrainTumorDetection-API/blob/main/Web%20Interface%20Screens/Screen_1-Upload%20image.png)
+
+### Screen 2: Show Prediction
+![Screen_2-Show prediction](https://github.com/Islam-hady9/BrainTumorDetection-API/blob/main/Web%20Interface%20Screens/Screen_2-Show%20prediction.png)
 
 ## Contributing
 
