@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <link rel="stylesheet" href="D:\Projects\Machine_Learning_Projects\05_BrainTumorDetection_API\BrainTumorDetection-API\static\styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Brain Tumor Detection</h1>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" accept="image/*" required>
+            <button type="submit">Upload and Predict</button>
+        </form>
+        <img id="imagePreview" src="" alt="Image Preview" style="display:none;">
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const imagePreview = document.getElementById('imagePreview');
+
+            if (fileInput.files.length === 0) {
+                alert('Please select a file first.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Display the selected image
+            const imageUrl = URL.createObjectURL(file);
+            imagePreview.src = imageUrl;
+            imagePreview.style.display = 'block';
+
+            try {
+                const response = await fetch('http://localhost:8000/predict/', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                document.getElementById('result').textContent = `Prediction: ${result.prediction}`;
+
+            } catch (error) {
+                document.getElementById('result').textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
