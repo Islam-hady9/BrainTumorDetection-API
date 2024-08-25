@@ -18,11 +18,12 @@ Brain tumor detection is a critical task in medical imaging, as early and accura
 
 ## Features
 
-- **Image Upload:** Upload MRI images directly to the API.
-- **Prediction:** The API returns a prediction indicating whether the image contains a brain tumor.
-- **Model Summary:** A simple CNN model is used, including layers for convolution, pooling, flattening, and dense connections.
-- **Data Augmentation:** The model uses data augmentation techniques to improve generalization and robustness.
-- **Visualization:** The repository includes scripts for visualizing training results, including loss curves and confusion matrices.
+- **Image Upload:** Users can upload MRI images directly through the web interface provided by the `index.html` page. The `static/styles.css` file ensures that the page is styled for a better user experience.
+- **Prediction:** The FastAPI API endpoint `/predict/` processes the uploaded image and returns a prediction indicating whether the image contains a brain tumor. Predictions are displayed on the web interface below the uploaded image.
+- **Model Summary:** A Convolutional Neural Network (CNN) is used for prediction. The model includes layers for convolution, pooling, flattening, and dense connections, and has been trained to achieve a high accuracy rate.
+- **Data Augmentation:** The model utilizes data augmentation techniques to enhance generalization and robustness. This helps in improving the model's performance by exposing it to a wider variety of training examples.
+- **Visualization:** Scripts are available for visualizing training results, including loss curves and confusion matrices, which help in evaluating the model's performance and understanding its learning progress.
+- **User Interface:** A simple and user-friendly web interface allows users to upload images and view predictions. The interface is styled using a separate `styles.css` file for a clean and professional look.
 
 ## Installation
 
@@ -59,21 +60,25 @@ pip install -r requirements.txt
 
 ### 1. **Train the Model**
 
-If you haven't trained the model yet, you can do so using the script provided in the repository. Ensure you have the dataset available in the correct format.
+If you haven’t trained the model yet, use the Jupyter Notebook `brain_tumor_detection_using_cnn.ipynb` provided in the repository. Ensure you have the MRI images in the `Dataset/` directory and in the correct format before running the notebook.
 
 ### 2. **Run the FastAPI Server**
 
 Start the FastAPI server to expose the API:
 
 ```bash
-uvicorn main:app --reload
+uvicorn app:app --reload
 ```
 
 The server will start running at `http://127.0.0.1:8000/`.
 
-### 3. **Make Predictions**
+### 3. **Access the Web Interface**
 
-You can make predictions by sending a POST request to the `/predict/` endpoint with an image file.
+Open your browser and navigate to `http://127.0.0.1:8000` to access the HTML interface. You can upload images through this interface and receive predictions.
+
+### 4. **Make Predictions via API**
+
+You can make predictions by sending a POST request to the `/predict/` endpoint with an image file. 
 
 Example using `curl`:
 
@@ -81,25 +86,31 @@ Example using `curl`:
 curl -X POST "http://127.0.0.1:8000/predict/" -F "file=@path_to_your_image.jpg"
 ```
 
-### 4. **Test the API**
+Replace `path_to_your_image.jpg` with the actual path to your MRI image file.
 
-You can also test the API using the `test_api.py` script provided in the repository:
+### 5. **Test the API**
+
+You can test the API using the `test_api.py` script provided in the repository:
 
 ```bash
 python test_api.py
 ```
 
-Make sure to replace `path_to_your_image.jpg` in the script with the actual path to your MRI image file.
+This script will send a sample image to the API and print the prediction result. Make sure to modify the script if necessary to use the correct path to your test image.
 
 ## Project Structure
 
-- `app.py`: The FastAPI application script.
-- `test_api.py`: A script to test the API by sending a sample image and printing the result.
-- `requirements.txt`: A file listing all Python dependencies required for the project.
-- `brain_tumor_detection_using_cnn.ipynb`: Training model file using CNN (Accuracy: 92.16%).
-- `brain_tumor_model.h5`: The trained Keras model file (to be generated after training).
-- `Dataset/`: Directory containing MRI images for training and testing.
-- `README.md`: This file, providing an overview and instructions for the project.
+- **`app.py`:** The FastAPI application script that defines the API endpoints and handles image uploads and predictions.
+- **`test_api.py`:** A script for testing the API by sending a sample image and printing the prediction result.
+- **`requirements.txt`:** A file listing all Python dependencies required for the project.
+- **`brain_tumor_detection_using_cnn.ipynb`:** Jupyter Notebook used for training the CNN model (Accuracy: 92.16%).
+- **`brain_tumor_model.h5`:** The trained Keras model file (to be generated after training).
+- **`Dataset/`:** Directory containing MRI images used for training and testing the model.
+- **`templates/`:** Directory containing HTML templates.
+  - **`index.html`:** The main HTML file providing the user interface for image uploads and predictions.
+- **`static/`:** Directory containing static files such as CSS.
+  - **`styles.css`:** The CSS file used for styling the `index.html` page.
+- **`README.md`:** This file, providing an overview and instructions for the project.
 
 ## Dataset
 
