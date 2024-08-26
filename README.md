@@ -110,6 +110,7 @@ This script will send a sample image to the API and print the prediction result.
   - **`index.html`:** The main HTML file providing the user interface for image uploads and predictions.
 - **`static/`:** Directory containing static files such as CSS.
   - **`styles.css`:** The CSS file used for styling the `index.html` page.
+- **`Project Presentation.pptx`:** Project presentation file.
 - **`README.md`:** This file, providing an overview and instructions for the project.
 
 ## Dataset
