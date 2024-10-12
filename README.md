@@ -2,7 +2,7 @@
 
 <div align="center">
   <p align="center">
-    <img src="https://projects.smartinternz.com/cdn/shop/files/5.Brain-tumour-1440x720.jpg?v=1702460420" alt="brain" />
+    <img src="https://github.com/Islam-hady9/BrainTumorDetection-API/blob/main/project_icon.jpg?raw=true" alt="brain" />
   </p>
 <p align="center">
 <strong>Brain Tumor Detection using CNN & FastAPI</strong></p>
